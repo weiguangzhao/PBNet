@@ -29,13 +29,58 @@ as an example. You need at least two RTX3090 cards with 24GB.
     pip install -r requirements
     cd lib/PB_lib
     python setup.py devel
+
+### Install segmentator 
+```
+cd lib/segmentator
+
+cd csrc && mkdir build && cd build
+
+cmake .. \
+-DCMAKE_PREFIX_PATH=`python -c 'import torch;print(torch.utils.cmake_prefix_path)'` \
+-DPYTHON_INCLUDE_DIR=$(python -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())")  \
+-DPYTHON_LIBRARY=$(python -c "import distutils.sysconfig as sysconfig; print(sysconfig.get_config_var('LIBDIR'))") \
+-DCMAKE_INSTALL_PREFIX=`python -c 'from distutils.sysconfig import get_python_lib; print(get_python_lib())'`
+
+make && make install # after install, please do not delete this folder (as we only create a symbolic link)
+```
+
+Further segmentator information can be found in [DKNet](https://github.com/W1zheng/DKNet) and [Segmentator](https://github.com/Karbo123/segmentator).
     
 ## Dataset Preparation
+(1) Download the [ScanNet v2](http://www.scan-net.org/) dataset.
+
+(2) Put the data in the corresponding folders. The dataset files are organized as follows.
+* Copy the files `[scene_id]_vh_clean_2.ply`,  `[scene_id]_vh_clean_2.0.010000.segs.json`,  `[scene_id].aggregation.json`  and `[scene_id].txt`  into the `datasets/scannetv2/train` and `dataset/scannetv2/val` folders according to the ScanNet v2 train/val [split](https://github.com/ScanNet/ScanNet/tree/master/Tasks/Benchmark).
+
+* Copy the files `[scene_id]_vh_clean_2.ply` into the `datasets/scannetv2/test` folder according to the ScanNet v2 test [split](https://github.com/ScanNet/ScanNet/tree/master/Tasks/Benchmark).
+
+* Put the file `scannetv2-labels.combined.tsv` in the `datasets/scannetv2` folder.
+
+
+```
+PBNet
+├── datasets
+│   ├── scannetv2
+│   │   ├── train
+│   │   │   ├── [scene_id]_vh_clean_2.ply & [scene_id]_vh_clean_2.0.010000.segs.json & [scene_id].aggregation.json & [scene_id].txt
+│   │   ├── val
+│   │   │   ├── [scene_id]_vh_clean_2.ply & [scene_id]_vh_clean_2.0.010000.segs.json & [scene_id].aggregation.json & [scene_id].txt
+│   │   ├── test
+│   │   │   ├── [scene_id]_vh_clean_2.ply 
+│   │   ├── scannetv2-labels.combined.tsv
+```
+(3) Decode the files to the "PBNet/datasets/scannetv2/npy/"
+    
+    cd PBNet
+    export PATHONPATH=./
+    python datasets/scannetv2/decode_scannet.py
+
 
 ## Citation
 If you find this work useful in your research, please cite:
 ```
-@inproceedings{zhao2022divide,
+@inproceedings{zhao2023divide,
   title={Divide and conquer: 3d point cloud instance segmentation with point-wise binarization},
   author={Zhao, Weiguang and Yan, Yuyao and Yang, Chaolong and Ye, Jianan and Yang, Xi and Huang, Kaizhu},
   booktitle={Proceedings of the IEEE/CVF international conference on computer vision (ICCV)},
