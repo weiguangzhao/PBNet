@@ -2,8 +2,7 @@
 ## Divide and  Conquer: 3D Point Cloud Instance Segmentation With Point-Wise Binarization (ICCV2023)
 ![overview](https://github.com/weiguangzhao/PBNet/blob/master/doc/overall.png)
 
-## Application: Boxes detection based on our PBNet in simulation scene
-[![Boxes detection based on our PBNet in simulation scene](https://res.cloudinary.com/marcomontalbano/image/upload/v1639841022/video_to_markdown/images/youtube--yp7FUmaoW_Q-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://www.youtube.com/watch?v=yp7FUmaoW_Q "Boxes detection based on our PBNet in simulation scene")
+## Application: [Detect Adjacent Boxes](https://www.youtube.com/watch?v=yp7FUmaoW_Q)
 
 ## Environments
 This code could be run on RTX8000 RTX3090 RTX2080TI etc. with CUDA11.x and CUDA 10.X. Below we take RTX3090 environments 
