@@ -1,4 +1,4 @@
-# PBNet
+# PBNet (coming soon)
 ## Divide and  Conquer: 3D Point Cloud Instance Segmentation With Point-Wise Binarization (ICCV2023)
 ![overview](https://github.com/weiguangzhao/PBNet/blob/master/doc/overall.png)
 
