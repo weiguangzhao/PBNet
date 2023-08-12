@@ -33,8 +33,8 @@ as an example. You need at least two RTX3090 cards with 24GB.
 ### Install segmentator 
 ```
 cd lib/segmentator
-
 cd csrc && mkdir build && cd build
+conda install cmake cudnn
 
 cmake .. \
 -DCMAKE_PREFIX_PATH=`python -c 'import torch;print(torch.utils.cmake_prefix_path)'` \
@@ -73,10 +73,10 @@ PBNet
 (3) Decode the files to the "PBNet/datasets/scannetv2/npy/"
     
     cd PBNet
-    export PATHONPATH=./
+    export PYTHONPATH=./
     python datasets/scannetv2/decode_scannet.py
 
-
+ 
 ## Citation
 If you find this work useful in your research, please cite:
 ```
