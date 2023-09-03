@@ -1,9 +1,12 @@
 import os
 import shutil
+import numpy as np
 
 # split scans specified in scannetv2_{train/val/test}.txt
 
 splits = ['train', 'val', 'test']
+test = np.loadtxt('./scannetv2_test.txt', dtype=str)
+test = np.load('./npy/scene0707_00_rgb.npy')
 
 for split in splits:
     print('processing', split)
