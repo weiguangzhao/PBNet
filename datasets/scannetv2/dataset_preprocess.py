@@ -76,7 +76,7 @@ class Dataset:
         np.random.seed(np_seed)
         random.seed(np_seed)
 
-    def dataAugment(self, xyz, rgb, nl, jitter=False, flip=False, rot=False, scale=False, elastic=False, prob=1.0):
+    def dataAugment(self, xyz, rgb, nl, i, jitter=False, flip=False, rot=False, scale=False, elastic=False, prob=1.0):
         m = np.eye(3)
         if jitter and np.random.rand() < prob:
             m += np.random.randn(3, 3) * 0.1
@@ -88,7 +88,7 @@ class Dataset:
                               [-math.sin(theta), math.cos(theta), 0], [0, 0, 1]])
         else:
             # Empirically, slightly rotate the scene can match the results from checkpoint
-            theta = 0.35 * math.pi
+            theta = 0.35 * math.pi + math.pi * i *(2/3)
             m = np.matmul(m, [[math.cos(theta), math.sin(theta), 0],
                               [-math.sin(theta), math.cos(theta), 0], [0, 0, 1]])
         xyz = np.matmul(xyz, m)
@@ -103,8 +103,7 @@ class Dataset:
             xyz = self.elastic(xyz, 20, 160)
             xyz = xyz - xyz.min(0)
 
-        # ####rgb [0, 255] to [-1, 1]
-        rgb = rgb / 127.5 - 1
+        # ####rgb
         rgb = rgb + np.random.randn(3) * 0.1
         return xyz, rgb, nl
 
@@ -227,8 +226,8 @@ class Dataset:
                 nl = np.load(self.npy_dir + '{}_nl.npy'.format(fn))
                 pass
             file_name.append(self.train_file_list[idx])
-
-            xyz, rgb, nl = self.dataAugment(xyz, rgb, nl, jitter=True, flip=True, rot=True, scale=True, elastic=True)
+            xyz = xyz - xyz.min(0)
+            xyz, rgb, nl = self.dataAugment(xyz, rgb, nl, i, jitter=True, flip=True, rot=True, scale=True, elastic=True)
 
             # #####mix up
             if self.mixup == True:
@@ -239,7 +238,7 @@ class Dataset:
                 mix_sem = SA.attach("shm://{}_sem_label".format(mix_fn)).copy()
                 mix_ins = SA.attach("shm://{}_ins_label".format(mix_fn)).copy()
                 mix_nl = SA.attach("shm://{}_nl".format(mix_fn)).copy()
-                mix_xyz, mix_rgb, mix_nl = self.dataAugment(mix_xyz, mix_rgb, mix_nl, jitter=True, flip=True, rot=True,
+                mix_xyz, mix_rgb, mix_nl = self.dataAugment(mix_xyz, mix_rgb, mix_nl, i, jitter=True, flip=True, rot=True,
                                                             scale=True, elastic=True)
                 # #merge scene
                 xyz = np.concatenate((xyz, mix_xyz), axis=0)
@@ -322,6 +321,7 @@ class Dataset:
         total_voxel_num = 0
 
         file_name = []
+        id = id + id + id
         for i, idx in enumerate(id):
             fn = self.val_file_list[idx]  # get shm name
             if self.cache:
@@ -341,7 +341,7 @@ class Dataset:
                 pass
             file_name.append(self.val_file_list[idx])
 
-            xyz, rgb, nl = self.dataAugment(xyz, rgb, nl, jitter=False, flip=False, rot=False, scale=False, elastic=False)
+            xyz, rgb, nl = self.dataAugment(xyz, rgb, nl, i, jitter=False, flip=False, rot=False, scale=False, elastic=False)
             ins = self.getInstLabel(ins)
             # ------------------------------- Voxel and Batch -------------------------
             feats_rgb_normal_line = np.concatenate((rgb, nl), axis=1).astype(np.float32)

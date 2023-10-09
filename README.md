@@ -1,8 +1,8 @@
-# PBNet (coming soon)
+# PBNet 
 ## Divide and  Conquer: 3D Point Cloud Instance Segmentation With Point-Wise Binarization (ICCV2023)
 ![overview](https://github.com/weiguangzhao/PBNet/blob/master/doc/overall.png)
 
-## Application: [Detect Adjacent Boxes](https://www.youtube.com/watch?v=yp7FUmaoW_Q)
+ ###[Paper](https://openaccess.thecvf.com/content/ICCV2023/html/Zhao_Divide_and_Conquer_3D_Point_Cloud_Instance_Segmentation_With_Point-Wise_ICCV_2023_paper.html) & [Code](https://github.com/weiguangzhao/PBNet) & [Application](https://www.youtube.com/watch?v=yp7FUmaoW_Q)
 
 ## Environments
 This code could be run on RTX8000 RTX3090 RTX2080TI etc. with CUDA11.x and CUDA 10.X. Below we take RTX3090 environments 
@@ -51,7 +51,7 @@ Further segmentator information can be found in [DKNet](https://github.com/W1zhe
 (1) Download the [ScanNet v2](http://www.scan-net.org/) dataset.
 
 (2) Put the data in the corresponding folders. The dataset files are organized as follows.
-* Copy the files `[scene_id]_vh_clean_2.ply`,  `[scene_id]_vh_clean_2.0.010000.segs.json`,  `[scene_id].aggregation.json`  and `[scene_id].txt`  into the `datasets/scannetv2/train` and `dataset/scannetv2/val` folders according to the ScanNet v2 train/val [split](https://github.com/ScanNet/ScanNet/tree/master/Tasks/Benchmark).
+* Copy the files `[scene_id]_vh_clean_2.ply`,  `[scene_id]_vh_clean_2.0.010000.segs.json`,  `[scene_id].aggregation.json`  and `[scene_id]_vh_clean_2.labels.ply`  into the `datasets/scannetv2/train` and `dataset/scannetv2/val` folders according to the ScanNet v2 train/val [split](https://github.com/ScanNet/ScanNet/tree/master/Tasks/Benchmark).
 
 * Copy the files `[scene_id]_vh_clean_2.ply` into the `datasets/scannetv2/test` folder according to the ScanNet v2 test [split](https://github.com/ScanNet/ScanNet/tree/master/Tasks/Benchmark).
 
@@ -63,9 +63,9 @@ PBNet
 ├── datasets
 │   ├── scannetv2
 │   │   ├── train
-│   │   │   ├── [scene_id]_vh_clean_2.ply & [scene_id]_vh_clean_2.0.010000.segs.json & [scene_id].aggregation.json & [scene_id].txt
+│   │   │   ├── [scene_id]_vh_clean_2.ply & [scene_id]_vh_clean_2.0.010000.segs.json & [scene_id].aggregation.json & [scene_id]_vh_clean_2.labels.ply
 │   │   ├── val
-│   │   │   ├── [scene_id]_vh_clean_2.ply & [scene_id]_vh_clean_2.0.010000.segs.json & [scene_id].aggregation.json & [scene_id].txt
+│   │   │   ├── [scene_id]_vh_clean_2.ply & [scene_id]_vh_clean_2.0.010000.segs.json & [scene_id].aggregation.json & [scene_id]_vh_clean_2.labels.ply
 │   │   ├── test
 │   │   │   ├── [scene_id]_vh_clean_2.ply 
 │   │   ├── scannetv2-labels.combined.tsv
@@ -75,8 +75,15 @@ PBNet
     cd PBNet
     export PYTHONPATH=./
     python datasets/scannetv2/decode_scannet.py
+## Training & Evaluation
+(1) Training 
+    
+    python train.py
 
- 
+(2) Evaluation on the val set with pretrained model (mAP/AP50/AP25:  56.4/71.4/80.3 > Our paper reported: 54.3/70.5/78.9)
+
+    python test_map
+
 ## Citation
 If you find this work useful in your research, please cite:
 ```
@@ -84,6 +91,13 @@ If you find this work useful in your research, please cite:
   title={Divide and conquer: 3d point cloud instance segmentation with point-wise binarization},
   author={Zhao, Weiguang and Yan, Yuyao and Yang, Chaolong and Ye, Jianan and Yang, Xi and Huang, Kaizhu},
   booktitle={Proceedings of the IEEE/CVF international conference on computer vision (ICCV)},
+  pages={562-571},
   year={2023}
 }
 ```
+
+## Acknowlegement
+This project is not possible without multiple great opensourced codebases. We list some notable examples: 
+[PointGroup](https://github.com/dvlab-research/PointGroup), [DyCo3D](https://github.com/aim-uofa/DyCo3D), [SSTNet](https://github.com/Gorilla-Lab-SCUT/SSTNet), 
+[HAIS](https://github.com/hustvl/HAIS), [SoftGroup](https://github.com/thangvubk/SoftGroup), [DKNet](https://github.com/W1zheng/DKNet), 
+[Mask3D](https://github.com/JonasSchult/Mask3D), [MinkowskiEngine]() etc.
