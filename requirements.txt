@@ -1,0 +1,8 @@
+numpy
+SharedArray
+plyfile
+numba
+tensorboardX
+pyyaml
+scipy
+matplotlib
