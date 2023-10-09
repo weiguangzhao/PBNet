@@ -2,7 +2,7 @@
 ## Divide and  Conquer: 3D Point Cloud Instance Segmentation With Point-Wise Binarization (ICCV2023)
 ![overview](https://github.com/weiguangzhao/PBNet/blob/master/doc/overall.png)
 
- ###[Paper](https://openaccess.thecvf.com/content/ICCV2023/html/Zhao_Divide_and_Conquer_3D_Point_Cloud_Instance_Segmentation_With_Point-Wise_ICCV_2023_paper.html) & [Code](https://github.com/weiguangzhao/PBNet) & [Application](https://www.youtube.com/watch?v=yp7FUmaoW_Q)
+<font size=4>[Paper](https://openaccess.thecvf.com/content/ICCV2023/html/Zhao_Divide_and_Conquer_3D_Point_Cloud_Instance_Segmentation_With_Point-Wise_ICCV_2023_paper.html) & [Code](https://github.com/weiguangzhao/PBNet) & [Application](https://www.youtube.com/watch?v=yp7FUmaoW_Q) </font>
 
 ## Environments
 This code could be run on RTX8000 RTX3090 RTX2080TI etc. with CUDA11.x and CUDA 10.X. Below we take RTX3090 environments 
@@ -80,7 +80,9 @@ PBNet
     
     python train.py
 
-(2) Evaluation on the val set with pretrained model (mAP/AP50/AP25:  56.4/71.4/80.3 > Our paper reported: 54.3/70.5/78.9)
+(2) Evaluation on the val set with the newest pretrained model
+
+(mAP/AP50/AP25: 56.4/71.4/80.3[newest] > 54.3/70.5/78.9[paper reported])
 
     python test_map
 
