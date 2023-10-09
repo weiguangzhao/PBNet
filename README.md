@@ -80,11 +80,12 @@ PBNet
     
     python train.py
 
-(2) Evaluation on the val set with the newest pretrained model
-
+(2) Evaluation on the val set with the newest pretrained model[(Drive)](https://drive.google.com/drive/folders/1f6nhK4-YjLbc3hTMND-8JsCbk7_Jt2pd?usp=drive_link). Download the pretrained model and put it in 
+under the 'PBNet/pretrain'' directory.
+ 
 (mAP/AP50/AP25: 56.4/71.4/80.3[newest] > 54.3/70.5/78.9[paper reported])
 
-    python test_map
+    python eval_map.py
 
 ## Citation
 If you find this work useful in your research, please cite:
