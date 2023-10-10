@@ -20,7 +20,7 @@ use_cuda_flag = False
 # ###define the file path
 SCANNET_DIR = './datasets/scannetv2/'
 LABEL_MAP_FILE = './datasets/scannetv2/scannetv2-labels.combined.tsv'
-OUTPUT_FOLDER = './datasets/scannetv2/npy_new/'
+OUTPUT_FOLDER = './datasets/scannetv2/npy/'
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 # Map relevant classes to {0,1,...,19}, and ignored classes to -100
