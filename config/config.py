@@ -17,7 +17,7 @@ def get_parser():
     parser.add_argument('--num_works', type=int, default=4, help='num_works for dataset')
     parser.add_argument('--pretrain', type=str, default='', help='path to pretrain model')
     parser.add_argument('--save_freq', type=int, default=4, help='Pre-training model saving frequency(epoch)')
-    parser.add_argument('--logpath', type=str, default='./log/config_1', help='path to save logs')
+    parser.add_argument('--logpath', type=str, default='./log/config_1/', help='path to save logs')
     parser.add_argument('--cache', type=bool, default=True, help='Whether to use shm')
     parser.add_argument('--validation', type=bool, default=True, help='Whether to verify the validation set')
 
