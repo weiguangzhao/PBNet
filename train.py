@@ -64,7 +64,7 @@ def train_epoch(train_loader, model, model_fn, optimizer, epoch):
                 am_dict[k] = log.AverageMeter()
             am_dict[k].update(v[0], v[1])
 
-        current_iter = epoch * len(train_loader) + i + 1
+        current_iter = (epoch-1) * len(train_loader) + i + 1
         max_iter = cfg.epochs * len(train_loader)
         remain_iter = max_iter - current_iter
         iter_time.update(time.time() - end_time)
@@ -301,6 +301,7 @@ def eval_epoch(val_loader, model, model_fn, epoch):
                 writer.add_scalar('val/mAP', avgs["all_ap"], epoch)
                 writer.add_scalar('val/AP_50', avgs["all_ap_50%"], epoch)
                 writer.add_scalar('val/AP_25', avgs["all_ap_25%"], epoch)
+            if epoch == cfg.epochs:  writer.close()
 
 
 def Distributed_training(gpu, cfgs):
@@ -381,7 +382,7 @@ def Distributed_training(gpu, cfgs):
         train_epoch(dataset.train_data_loader, model, model_fn, optimizer, epoch)
         #
         # # # #validation
-        if cfg.validation and epoch%4==0:
+        if cfg.validation and (epoch % 4 == 0 or epoch == cfg.epochs):
             dataset.val_sampler.set_epoch(epoch)
             eval_epoch(dataset.val_data_loader, model, model_fn, epoch)
     pass

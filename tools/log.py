@@ -98,7 +98,7 @@ def checkpoint_restore(model, optimizer, logpath, epoch=0, dist=False, pretrain_
         if dist:
             torch.distributed.barrier()
 
-    return epoch, pretrain_file
+    return epoch+1, pretrain_file
 
 
 def checkpoint_save(model, optimizer, logpath, epoch, save_freq=1):
