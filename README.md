@@ -29,7 +29,7 @@ as an example. You need at least two RTX3090 cards with 24GB.
 ### Install Our PB_lib
     pip install -r requirements
     cd lib/PB_lib
-    python setup.py devel
+    python setup.py develop
 
 ### Install segmentator 
 ```
