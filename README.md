@@ -76,6 +76,8 @@ PBNet
     cd PBNet
     export PYTHONPATH=./
     python datasets/scannetv2/decode_scannet.py
+    python datasets/scannetv2/get_val_gt.py
+
 ## Training & Evaluation
 (1) Training 
     
