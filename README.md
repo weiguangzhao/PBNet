@@ -106,4 +106,4 @@ If you find this work useful in your research, please cite:
 This project is not possible without multiple great opensourced codebases. We list some notable examples: 
 [PointGroup](https://github.com/dvlab-research/PointGroup), [DyCo3D](https://github.com/aim-uofa/DyCo3D), [SSTNet](https://github.com/Gorilla-Lab-SCUT/SSTNet), 
 [HAIS](https://github.com/hustvl/HAIS), [SoftGroup](https://github.com/thangvubk/SoftGroup), [DKNet](https://github.com/W1zheng/DKNet), 
-[Mask3D](https://github.com/JonasSchult/Mask3D), [MinkowskiEngine]() etc.
+[Mask3D](https://github.com/JonasSchult/Mask3D), [MinkowskiEngine](https://github.com/NVIDIA/MinkowskiEngine) etc.
