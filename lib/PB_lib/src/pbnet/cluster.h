@@ -9,7 +9,6 @@
 #define PBNET_CLUSTER_H
 #include <torch/serialize/tensor.h>
 #include <ATen/cuda/CUDAContext.h>
-#include <THC/THC.h>
 
 void binary_cluster(at::Tensor x_tensor, at::Tensor y_tensor, at::Tensor z_tensor, at::Tensor l1_norm_tensor,
                     at::Tensor index_mapper_tensor, at::Tensor xo_tensor, at::Tensor yo_tensor, at::Tensor zo_tensor,
